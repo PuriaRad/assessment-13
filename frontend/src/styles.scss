@@ -1,6 +1,3 @@
-@import '~@fortawesome/fontawesome-free/css/all.css'; // Plus imports for other components in your app.
-@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
@@ -36,6 +33,9 @@ $assessment-13-theme: mat.define-light-theme((
 @include mat.all-component-themes($assessment-13-theme);
 
 /* You can add global styles to this file, and also import other style files */
+
+@import '@fortawesome/fontawesome-free/css/all.css'; // Plus imports for other components in your app.
+@import url("https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css");
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
