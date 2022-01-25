@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class LoadingService {
-  isLoading = new BehaviorSubject<boolean>(true);
+  isLoading = new BehaviorSubject<boolean>(false);
 
   constructor() {}
 
