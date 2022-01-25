@@ -1,1 +1,22 @@
-<p>home works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-9">
+      <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Smart Hardware Shop</h1>
+          <p class="lead">All we have to decide is what to do with the time that is given us.</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3 pl-md-0">
+        <div class="form-group text-left">
+          <label for="search" class="bold">Search</label>
+          <input class="form-control" type="text" name="search" (enter)="search($event)" />
+        </div>
+      </div>
+      <!-- <app-photo-grid [products]="recoms$ | async "></app-photo-grid> -->
+    </div>
+    <div class="col-12 col-md-12 col-lg-3">
+      <app-cart></app-cart>
+    </div>
+  </div>
+</div>
