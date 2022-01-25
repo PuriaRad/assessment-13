@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import {
   ErrorHandler,
   Injectable,
@@ -13,53 +12,22 @@ import swal from 'sweetalert2';
 export class ErrorHandlerService implements ErrorHandler {
   constructor(public router: Router) {}
 
-  handleError(error: any | HttpErrorResponse) {
-    console.group('ErrorHandler');
-    console.error(error.message);
-    console.error(error.stack);
-    console.error(window.location.href);
-    console.groupEnd();
+  handleError(error: any) {
+    let errorMessage = '';
 
-    if (error instanceof HttpErrorResponse) {
-      this.handleHttpError(error);
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
     } else {
-      this.errorAlert({
-        errorStatus: 500,
-        errorMessage: 'Unknown error!',
-        errorError: error,
-      });
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
-
+    this.errorAlert(errorMessage);
     throw error;
   }
 
-  public handleHttpError(error: HttpErrorResponse) {
-    console.group('ErrorHandler');
-    console.error(error);
-    console.error(window.location.href);
-    console.groupEnd();
-    let newError;
-
-    if (error.error) {
-      newError = {
-        errorStatus: error.status,
-        errorMessage: error.error.error,
-        errorError: error,
-      };
-    } else {
-      newError = {
-        errorStatus: 500,
-        errorMessage: 'Unknown error',
-        errorError: error,
-      };
-    }
-    this.errorAlert(newError);
-  }
-
-  errorAlert(errorMessage: any) {
+  errorAlert(errorMessage: string) {
     swal.fire({
       title: 'Error',
-      text: errorMessage.errorMessage,
+      text: errorMessage,
       confirmButtonText: 'Ok',
       showDenyButton: false,
       customClass: {
