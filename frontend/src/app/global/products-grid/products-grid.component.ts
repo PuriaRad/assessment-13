@@ -1,8 +1,4 @@
-import {
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/classes/product';
@@ -14,6 +10,8 @@ import { Product } from 'src/app/classes/product';
 })
 export class ProductsGridComponent implements OnInit {
   @Input() products!: Observable<Product[]>;
+  cols = [1, 2, 3];
+
   constructor() {}
 
   ngOnInit(): void {}

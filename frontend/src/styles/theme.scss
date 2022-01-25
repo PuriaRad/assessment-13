@@ -1,6 +1,8 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
+@use 'sass:map';
+
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -19,15 +21,37 @@ $assessment-13-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$assessment-13-theme: mat.define-light-theme((
-  color: (
-    primary: $assessment-13-primary,
-    accent: $assessment-13-accent,
-    warn: $assessment-13-warn,
+$assessment-13-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $assessment-13-primary,
+      accent: $assessment-13-accent,
+      warn: $assessment-13-warn,
+    ),
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($assessment-13-theme);
+
+$white: #fff;
+$black: #000;
+
+$colors: (
+  'white': $white,
+  'black': $black,
+);
+
+@each $key, $color in $colors {
+  .#{$key}-color {
+    color: $color !important;
+  }
+  .#{$key}-back {
+    background-color: $color !important;
+  }
+  .#{$key}-color-hover:hover {
+    color: $color !important;
+  }
+}
