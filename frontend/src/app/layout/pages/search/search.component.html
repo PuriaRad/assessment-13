@@ -1,1 +1,35 @@
-<p>search works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-9">
+      <div class="col-12 col-md-6 col-lg-3 pl-md-0">
+        <div class="form-group text-left">
+          <label for="search" class="bold">Search</label>
+          <div class="input-group">
+            <input
+              class="form-control"
+              type="text"
+              name="search"
+              (keyup.enter)="search()"
+              [(ngModel)]="keywords"
+              [ngModelOptions]="{ standalone: true }"
+            />
+            <div class="input-group-addon">
+              <button
+                class="btn border"
+                type="button"
+                style="height: 38px; border-radius: 0"
+                (click)="search()"
+              >
+                <mat-icon>search</mat-icon>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <app-products-grid [products]="products$"></app-products-grid>
+    </div>
+    <div class="col-12 col-md-12 col-lg-3">
+      <app-cart></app-cart>
+    </div>
+  </div>
+</div>

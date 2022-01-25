@@ -21,12 +21,19 @@ interface IProduct {
 export class ProductApiService {
   constructor(private crud: CrudService) {}
 
-  getProducts(pageIndex: number, pageSize: number): Observable<Product[]> {
+  getProducts(pageIndex?: number, pageSize?: number, query?: string): Observable<Product[]> {
+    let options: any = {};
+    if (pageIndex) {
+      options['_page_number'] = pageIndex;
+    }
+    if (pageSize) {
+      options['_limit'] = pageSize;
+    }
+    if (query) {
+      options['q'] = query;
+    }
     return this.crud
-      .getAll<Product>('products', {
-        _page_number: pageIndex.toString(),
-        _limit: pageSize.toString(),
-      })
+      .getAll<Product>('products', options)
       .pipe(
         map((products) =>
           products.map(

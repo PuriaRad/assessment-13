@@ -7,6 +7,7 @@ import {
   Observable,
   Subscription,
 } from 'rxjs';
+import { CartService } from './core/services/cart.service';
 
 import { LoadingService } from './core/services/loading.service';
 import { UserService } from './core/services/user.service';
@@ -20,11 +21,12 @@ import { UserService } from './core/services/user.service';
 export class AppComponent {
   isLoading$!: Observable<boolean>;
   loadingSub!: Subscription;
-  constructor(public loaderService: LoadingService, private user: UserService) {
+  constructor(public loaderService: LoadingService, private user: UserService, private cartService: CartService) {
     user.autoLogin()
   }
 
-  ngAfterViewInit() {
+  async ngAfterViewInit() {
     this.loaderService.isLoading.pipe((loader) => (this.isLoading$ = loader));
+    await this.cartService.setCart();
   }
 }

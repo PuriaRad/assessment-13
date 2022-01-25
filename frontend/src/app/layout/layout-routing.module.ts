@@ -1,8 +1,5 @@
 import { NgModule } from '@angular/core';
-import {
-  RouterModule,
-  Routes,
-} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AuthorizationGuard } from '../core/guards/authorization.guard';
 import { LayoutComponent } from './layout.component';
@@ -25,9 +22,12 @@ const routes: Routes = [
           import('./pages/admin-products/admin-products.module').then((m) => m.AdminProductsModule),
         canActivate: [AuthorizationGuard],
       },
+      {
+        path: 'search',
+        loadChildren: () => import('./pages/search/search.module').then((m) => m.SearchModule),
+      },
     ],
   },
-  { path: 'search', loadChildren: () => import('./pages/search/search.module').then(m => m.SearchModule) },
 ];
 
 @NgModule({
