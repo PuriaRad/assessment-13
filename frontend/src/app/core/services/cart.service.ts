@@ -38,8 +38,7 @@ export class CartService {
       }
 
       this.cart.next(currentValue);
-
-      //TODO call the webservice and update the Cart
+      //TODO call the API and update the Cart! But guess what? There is no API!
     }
   }
 
