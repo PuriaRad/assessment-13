@@ -1,1 +1,36 @@
-<p>cart works!</p>
+<div class="sticky white-back border">
+  <div class="container">
+    <div class="shopping-cart">
+      <div class="shopping-cart-header">
+        <div class="shopping-cart-total">
+          <span class="lighter-text">Total: </span>
+          <span class="main-color-text">{{ (cartService.cart | async)?.sumFinalPrice | currency:'$'}}</span>
+        </div>
+        <mat-icon color="primary" matBadge="4" matBadgeOverlap="false" class="black-color float-right">
+          shopping_cart
+          <span class="cdk-visually-hidden">
+            3
+          </span>
+        </mat-icon>
+
+      </div>
+      <!--end shopping-cart-header -->
+      <div class="mx-auto text-center mt-3" *ngIf="!(cartService.cart | async)">
+        <mat-spinner class="mx-auto"></mat-spinner>
+      </div>
+      <ul class="shopping-cart-items">
+        <li class="clearfix" *ngFor="let item of (cartService.cart |async)?.productOrders">
+          <img [src]="item.product.defaultImage" width="100" height="70" [alt]="item.product.name" />
+          <span class="item-name">{{(item.product.name.length>60)? (item.product.name |
+            slice:0:60)+'...':(item.product.name)}}</span>
+          <span class="item-price">{{item.product.price | currency:'$'}}</span>
+          <span class="item-quantity">Quantity: {{item.quantity}}</span>
+        </li>
+      </ul>
+
+      <button class="btn-block" color="primary" mat-raised-button>Checkout</button>
+    </div>
+    <!--end shopping-cart -->
+  </div>
+  <!--end container -->
+</div>

@@ -50,5 +50,6 @@ describe('Cart', () => {
     expect(cart.sumDiscount).toBe(800);
     expect(cart.sumPrice).toBe(5600);
     expect(cart.sumFinalPrice).toBe(4800);
+    expect(cart.sumQuantity).toBe(5);
   });
 });
