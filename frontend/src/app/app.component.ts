@@ -1,6 +1,12 @@
-import { Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+} from '@angular/core';
 
-import { Observable } from 'rxjs';
+import {
+  Observable,
+  Subscription,
+} from 'rxjs';
 
 import { LoadingService } from './core/services/loading.service';
 import { UserService } from './core/services/user.service';
@@ -9,11 +15,14 @@ import { UserService } from './core/services/user.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   isLoading$!: Observable<boolean>;
+  loadingSub!: Subscription;
+  constructor(public loaderService: LoadingService, private user: UserService) {}
 
-  constructor(public loaderService: LoadingService, private user: UserService) {
-    loaderService.isLoading.pipe((loader) => (this.isLoading$ = loader));
+  ngAfterViewInit() {
+    this.loaderService.isLoading.pipe((loader) => (this.isLoading$ = loader));
   }
 }
