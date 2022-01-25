@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {
+  RouterModule,
+  Routes,
+} from '@angular/router';
+
 import { AuthorizationGuard } from '../core/guards/authorization.guard';
 import { LayoutComponent } from './layout.component';
 
@@ -8,7 +12,7 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: 'home', loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule) },
+      { path: '', loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule) },
       {
         path: 'product',
         loadChildren: () => import('./pages/product/product.module').then((m) => m.ProductModule),
