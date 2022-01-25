@@ -14,13 +14,19 @@ export class Cart {
   }
 
   get sumDiscount() {
-    return this.productOrders.map((productOrder) => productOrder.product.discount * productOrder.quantity).reduce((p, c) => p + c, 0);
+    return this.productOrders
+      .map((productOrder) => productOrder.product.discount * productOrder.quantity)
+      .reduce((p, c) => p + c, 0);
   }
 
   get sumPrice() {
     return this.productOrders
       .map((productOrder) => productOrder.product.price * productOrder.quantity)
       .reduce((p, c) => p + c, 0);
+  }
+
+  get sumQuantity() {
+    return this.productOrders.map((productOrder) => productOrder.quantity).reduce((p, c) => p + c, 0);
   }
 
   get sumFinalPrice() {
