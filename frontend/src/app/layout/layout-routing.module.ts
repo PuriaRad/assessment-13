@@ -14,10 +14,6 @@ const routes: Routes = [
     children: [
       { path: '', loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule) },
       {
-        path: 'product',
-        loadChildren: () => import('./pages/product/product.module').then((m) => m.ProductModule),
-      },
-      {
         path: 'admin-product',
         loadChildren: () =>
           import('./pages/admin-product/admin-product.module').then((m) => m.AdminProductModule),
@@ -31,6 +27,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'search', loadChildren: () => import('./pages/search/search.module').then(m => m.SearchModule) },
 ];
 
 @NgModule({
