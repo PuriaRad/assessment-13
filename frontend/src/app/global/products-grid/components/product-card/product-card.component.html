@@ -1,6 +1,7 @@
 <img class="card-img-bottom img-fluid" [src]="product.defaultImage" [alt]="product.name" />
 <div class="card-body inside-card">
   <h5 class="card-title">{{ product.name }}</h5>
-  <p class="card-text">{{product.description}}</p>
+  <p class="card-text">{{ (product.description.length>60)? (product.description | slice:0:60)+'...':(product.description)}}
+  </p>
   <a mat-raised-button color="primary">Add to cart <i class="fas fa-shopping-cart"></i></a>
 </div>
