@@ -1,1 +1,15 @@
+<div id="loader" *ngIf="isLoading$ | async">
+  <div class="loading">
+    <div class="primary-back">
+      <div class="row text-center justify-content-center align-items-end h-100 pt-4">
+        <div class="col-12">
+          <img src="./assets/loader.gif" />
+        </div>
+        <div class="col-12 mt-3">
+          <p class="white-color links text-center bold"> Please wait!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <router-outlet></router-outlet>
