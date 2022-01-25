@@ -1,1 +1,78 @@
-<p>auth works!</p>
+<div class="container">
+  <div class="row justify-content-start px-3 mt-3 py-3 mb-3 mat-elevation-z2 white-back text-left">
+    <div class="form-group text-left">
+      <label for="search" class="bold">Search</label>
+      <input class="form-control" type="text" name="search" (keyup)="applyFilter($event)" />
+    </div>
+  </div>
+  <div class="row justify-content-start mt-3 py-3 mb-3 mat-elevation-z2 white-back text-left">
+    <div class="col-12">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" matSort dir="ltr" style="width: 100% !important">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.id }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="avatar">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Avatar</th>
+            <td mat-cell *matCellDef="let element">
+              <img width="100px" height="100px" [src]="element.avatar" [alt]="element.fullName" />
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="fullName">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Full name</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.fullName }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="country">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.address.country }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>City</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.address.city }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.email }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="role">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Role</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.role }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="login">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Login as</th>
+            <td mat-cell *matCellDef="let element" class="text-center">
+              <button mat-icon-button (click)="loginAs(element)" color="primary">
+                <i class="fas fa-sign-in-alt"></i>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-12">
+      <mat-paginator
+        #paginator
+        [length]="(users$ | async)?.length"
+        showFirstLastButtons
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

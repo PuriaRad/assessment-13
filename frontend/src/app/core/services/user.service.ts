@@ -21,6 +21,7 @@ export class UserService {
       this.user.next(
         new User(user.id, user.name, user.phone, user.avatar, user.email, user.address, user.role)
       );
+      console.log('this.user.getValue() :>> ', this.user.getValue());
     }
   }
 
