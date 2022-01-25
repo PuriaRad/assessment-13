@@ -10,6 +10,7 @@ import {
 
 import { ErrorHandlerService } from './error/error-handler.service';
 import { httpInterceptorProviders } from './interceptors';
+import { LoadingService } from './services/loading.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -24,7 +25,11 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
-      providers: [httpInterceptorProviders, { provide: ErrorHandler, useClass: ErrorHandlerService }],
+      providers: [
+        LoadingService,
+        httpInterceptorProviders,
+        { provide: ErrorHandler, useClass: ErrorHandlerService },
+      ],
     };
   }
 }

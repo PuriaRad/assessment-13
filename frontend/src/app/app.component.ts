@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 
+import { Observable } from 'rxjs';
+
+import { LoadingService } from './core/services/loading.service';
 import { UserService } from './core/services/user.service';
 
 @Component({
@@ -8,5 +11,9 @@ import { UserService } from './core/services/user.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private user: UserService) {}
+  isLoading$!: Observable<boolean>;
+
+  constructor(public loaderService: LoadingService, private user: UserService) {
+    loaderService.isLoading.pipe((loader) => (this.isLoading$ = loader));
+  }
 }
