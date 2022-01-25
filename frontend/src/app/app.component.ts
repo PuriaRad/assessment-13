@@ -20,7 +20,9 @@ import { UserService } from './core/services/user.service';
 export class AppComponent {
   isLoading$!: Observable<boolean>;
   loadingSub!: Subscription;
-  constructor(public loaderService: LoadingService, private user: UserService) {}
+  constructor(public loaderService: LoadingService, private user: UserService) {
+    user.autoLogin()
+  }
 
   ngAfterViewInit() {
     this.loaderService.isLoading.pipe((loader) => (this.isLoading$ = loader));

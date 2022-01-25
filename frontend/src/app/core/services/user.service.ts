@@ -12,7 +12,6 @@ export class UserService {
   user = new BehaviorSubject<User | null>(null);
 
   constructor(private storage: StorageService) {
-    this.autoLogin();
   }
 
   autoLogin() {
@@ -21,8 +20,8 @@ export class UserService {
       this.user.next(
         new User(user.id, user.name, user.phone, user.avatar, user.email, user.address, user.role)
       );
-      console.log('this.user.getValue() :>> ', this.user.getValue());
     }
+    console.log('user :>> ', user);
   }
 
   loginWithUser(user: User): void {
