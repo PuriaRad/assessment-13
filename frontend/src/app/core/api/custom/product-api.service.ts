@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {
-  map,
-  Observable,
-} from 'rxjs';
+import { map, Observable, take } from 'rxjs';
 import { Product } from 'src/app/classes/product';
 
 import { CrudService } from '../crud.service';
@@ -49,24 +46,23 @@ export class ProductApiService {
   }
 
   getRecommended(): Observable<Product[]> {
-    return this.crud
-      .getAll<Product>('recommendeds')
-      .pipe(
-        map((products) =>
-          products.map(
-            (product) =>
-              new Product(
-                product.id,
-                product.name,
-                product.description,
-                product.defaultImage,
-                product.images,
-                product.price,
-                product.discount
-              )
-          )
+    return this.crud.getAll<Product>('recommendeds').pipe(
+      map((products) => products.slice(0, 9)),
+      map((products) =>
+        products.map(
+          (product) =>
+            new Product(
+              product.id,
+              product.name,
+              product.description,
+              product.defaultImage,
+              product.images,
+              product.price,
+              product.discount
+            )
         )
-      );
+      )
+    );
   }
 
   getProduct(id: number): Observable<Product> {

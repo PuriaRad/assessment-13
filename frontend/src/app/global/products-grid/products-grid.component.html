@@ -1,0 +1,18 @@
+<div class="container-fluid h-65vh px-0">
+  <div class="mx-auto text-center mt-3" *ngIf="!(products | async)">
+    <mat-spinner class="mx-auto"></mat-spinner>
+  </div>
+  <div class="row w-100 mx-auto" *ngIf="(products | async)">
+    <div class="col-md-12 col-xs-12 px-2 align-self-center mt-3" id="products">
+      <div class="row justify-content-md-center text-center sibling-fade">
+        <div class="col pl-2 pr-2" *ngFor="let j of cols">
+          <ng-container *ngFor="let product of (products | async); let i = index">
+            <div *ngIf="i % 3 == j - 1" class="card  mb-3">
+              <app-product-card [product]="product"></app-product-card>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

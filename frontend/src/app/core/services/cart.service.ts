@@ -3,25 +3,34 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Cart } from 'src/app/classes/cart';
 import { Product } from 'src/app/classes/product';
+import { CartApiService } from '../api/custom/cart-api.service';
+import { UserService } from './user.service';
+import { User } from 'src/app/classes/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   cart = new BehaviorSubject<Cart | null>(null);
-  constructor() {}
+  constructor(private cartApi: CartApiService, private userService: UserService) {}
 
-  setCart(userId:number):void{
-    //TODO Call api and get the cart. Then set it to this.cart
+  async setCart() {
+    if (this.userService.user.getValue()) {
+      const user: User = this.userService.user.getValue() as User;
+      const cart = await this.cartApi.getCart(user.id);
+      if (cart) {
+        this.cart.next(cart);
+      }
+    }
   }
 
-  addProduct(product: Product, quantity: number):void {
+  addProduct(product: Product, quantity: number): void {
     if (this.cart.getValue() !== null) {
       const currentValue: Cart = this.cart.getValue() as Cart;
 
       // check if product is already in the list. If it is, just add the quantity, if not, push new prod to cart
       const duplicateIndex = currentValue.productOrders.findIndex((prod) => prod.product.id === product.id);
-      if (duplicateIndex) {
+      if (duplicateIndex != -1) {
         currentValue.productOrders[duplicateIndex].quantity =
           currentValue.productOrders[duplicateIndex].quantity + quantity;
       } else {
@@ -29,8 +38,7 @@ export class CartService {
       }
 
       this.cart.next(currentValue);
-
-      //TODO call the webservice and update the Cart
+      //TODO call the API and update the Cart! But guess what? There is no API!
     }
   }
 
