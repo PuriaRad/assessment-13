@@ -18,7 +18,7 @@ export class UserService {
     const user = this.storage.getStorage('user');
     if (user) {
       this.user.next(
-        new User(user.id, user.name, user.phone, user.avatar, user.email, user.address, user.role)
+        new User(user._id, user.name, user.phone, user.avatar, user.email, user.address, user._role)
       );
     }
     console.log('user :>> ', user);

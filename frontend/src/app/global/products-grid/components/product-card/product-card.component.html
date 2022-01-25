@@ -1,7 +1,25 @@
 <img class="card-img-bottom img-fluid" [src]="product.defaultImage" [alt]="product.name" />
 <div class="card-body inside-card">
   <h5 class="card-title">{{ product.name }}</h5>
-  <p class="card-text">{{ (product.description.length>60)? (product.description | slice:0:60)+'...':(product.description)}}
+  <p class="card-text">{{ (product.description.length>60)? (product.description |
+    slice:0:60)+'...':(product.description)}}
   </p>
-  <a mat-raised-button color="primary">Add to cart <i class="fas fa-shopping-cart"></i></a>
+  <div class="row text-center align-items-center justify-content-center mx-auto my-3">
+    <div class="col-8">
+      <div class="btn-group-count">
+        <button class="white-back border-0 text-center failed-color" (click)="minus()">
+          <i class="fa fa-minus"></i>
+        </button>
+        <button class="border-0">
+          {{ quantity }}
+        </button>
+        <button class="white-back border-0 text-center success-color" (click)="plus()">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <a mat-raised-button color="primary" class="btn-block" (click)="addToCart()">Add to cart
+    <i class="fas fa-shopping-cart"></i></a>
 </div>

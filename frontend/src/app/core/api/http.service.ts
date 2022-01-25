@@ -4,7 +4,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, shareReplay } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 import { ErrorHandlerService } from '../error/error-handler.service';
@@ -34,14 +34,16 @@ export class HttpService {
       options.param = '';
     }
 
-    return this.http.request(method, `${environment.backendAPI + url}${options.param}`, {
-      body: options.body,
-      headers: options.headers,
-      observe: options.observe,
-      params: options.params,
-      responseType: options.responseType,
-      reportProgress: options.reportProgress,
-      withCredentials: options.withCredentials,
-    });
+    return this.http
+      .request(method, `${environment.backendAPI + url}${options.param}`, {
+        body: options.body,
+        headers: options.headers,
+        observe: options.observe,
+        params: options.params,
+        responseType: options.responseType,
+        reportProgress: options.reportProgress,
+        withCredentials: options.withCredentials,
+      })
+      .pipe(shareReplay(1));
   }
 }
