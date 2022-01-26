@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import {
   ComponentFixture,
   TestBed,
@@ -15,7 +16,7 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HeaderComponent],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, HttpClientModule],
       providers: [UserService],
     }).compileComponents();
   });
