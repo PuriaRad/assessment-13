@@ -26,7 +26,16 @@ export class AdminProductsComponent implements OnInit {
   products$!: Observable<Product[]>;
   isLoadingResults = true;
 
-  public displayedColumns = ['id', 'defaultImage', 'name', 'description', 'discount', 'price', 'edit'];
+  public displayedColumns = [
+    'id',
+    'defaultImage',
+    'name',
+    'description',
+    'discount',
+    'price',
+    'edit',
+    'delete',
+  ];
   public dataSource = new _MatTableDataSource<Product>();
 
   pageIndex = 0;
@@ -63,5 +72,11 @@ export class AdminProductsComponent implements OnInit {
 
   edit(element: Product) {
     this.router.navigate(['/admin-product/' + element.id]);
+  }
+
+  remove(element: Product) {
+    this.productAPI.delete(element.id).subscribe(() => {
+      this.fetchData();
+    });
   }
 }

@@ -36,7 +36,7 @@
           </ng-container>
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>Name</th>
-            <td width="20%" mat-cell *matCellDef="let element">
+            <td width="15%" mat-cell *matCellDef="let element">
               {{ element.name }}
             </td>
           </ng-container>
@@ -65,9 +65,18 @@
 
           <ng-container matColumnDef="edit">
             <th mat-header-cell *matHeaderCellDef>Edit</th>
-            <td width="5%" mat-cell *matCellDef="let element" class="text-center">
+            <td width="5%" mat-cell *matCellDef="let element" class="text-left">
               <button mat-icon-button (click)="edit(element)" color="primary">
                 <i class="fas fa-edit"></i>
+              </button>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>Delete</th>
+            <td width="5%" mat-cell *matCellDef="let element" class="text-center">
+              <button mat-icon-button (click)="remove(element)" color="warn">
+                <i class="fas fa-times"></i>
               </button>
             </td>
           </ng-container>
