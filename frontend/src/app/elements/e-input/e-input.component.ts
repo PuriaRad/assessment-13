@@ -47,7 +47,6 @@ export class EInputComponent implements OnInit {
   @Input() public suffix = ' $';
 
   constructor(
-    private cdref: ChangeDetectorRef,
     private elementRef: ElementRef,
     private renderer: Renderer2
   ) {}
@@ -65,9 +64,5 @@ export class EInputComponent implements OnInit {
     this.renderer.addClass(this.elementRef.nativeElement, 'col-md-' + this.md);
     this.renderer.addClass(this.elementRef.nativeElement, 'col-lg-' + this.lg);
     this.renderer.addClass(this.elementRef.nativeElement, 'col-xl-' + this.xl);
-  }
-
-  ngAfterContentChecked(): void {
-    this.cdref.detectChanges();
   }
 }

@@ -1,4 +1,14 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { Title } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
+
+import { ProductApiService } from 'src/app/core/api/custom/product-api.service';
+import { EButtonModule } from 'src/app/elements/e-button/e-button.module';
 
 import { AdminProductsComponent } from './admin-products.component';
 
@@ -8,9 +18,18 @@ describe('AdminProductsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminProductsComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminProductsComponent],
+      imports: [
+        BrowserAnimationsModule,
+        MatTableModule,
+        MatPaginatorModule,
+        EButtonModule,
+        MatButtonModule,
+        RouterTestingModule,
+        HttpClientModule,
+      ],
+      providers: [ProductApiService, Title],
+    }).compileComponents();
   });
 
   beforeEach(() => {

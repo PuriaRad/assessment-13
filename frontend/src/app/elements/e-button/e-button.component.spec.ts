@@ -1,4 +1,8 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Renderer2 } from '@angular/core';
+import {
+  ComponentFixture,
+  TestBed,
+} from '@angular/core/testing';
 
 import { EButtonComponent } from './e-button.component';
 
@@ -8,9 +12,9 @@ describe('EButtonComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EButtonComponent ]
-    })
-    .compileComponents();
+      declarations: [EButtonComponent],
+      providers: [Renderer2],
+    }).compileComponents();
   });
 
   beforeEach(() => {

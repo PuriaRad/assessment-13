@@ -30,7 +30,7 @@ export class CartApiService {
 
   private async CreateProductOrders(iCart: ICart) {
     return Promise.all(
-      iCart.products.map(async (iProduct) => {
+      iCart.products.map(async (iProduct: { id: number; quantity: number }) => {
         const product = await lastValueFrom(this.productAPI.getProduct(iProduct.id));
         return {
           product,

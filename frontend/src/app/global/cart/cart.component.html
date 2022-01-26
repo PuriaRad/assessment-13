@@ -3,27 +3,45 @@
     <div class="shopping-cart">
       <div class="shopping-cart-header">
         <div class="shopping-cart-total">
-          <span class="lighter-text">Total: </span>
-          <span class="main-color-text">{{ (cartService.cart | async)?.sumFinalPrice | currency:'$'}}</span>
+          <span class="lighter-text">Total Price: </span>
+          <span class="main-color-text black-color"
+            ><del>{{ (cartService.cart | async)?.sumPrice | currency: '$' }}</del></span
+          >
         </div>
-        <mat-icon color="primary" [matBadge]="(cartService.cart | async)?.sumQuantity" matBadgeOverlap="false" class="black-color float-right">
+        <br />
+        <div class="shopping-cart-total">
+          <span class="lighter-text">Total discount: </span>
+          <span class="text-danger">{{ (cartService.cart | async)?.sumDiscount | currency: '$' }}</span>
+        </div>
+        <br />
+        <div class="shopping-cart-total">
+          <span class="lighter-text">Total: </span>
+          <span class="text-success">{{ (cartService.cart | async)?.sumFinalPrice | currency: '$' }}</span>
+        </div>
+        <mat-icon
+          color="primary"
+          [matBadge]="(cartService.cart | async)?.sumQuantity"
+          matBadgeOverlap="false"
+          class="black-color float-right"
+        >
           shopping_cart
-          <span class="cdk-visually-hidden">
-          </span>
+          <span class="cdk-visually-hidden"> </span>
         </mat-icon>
-
       </div>
       <!--end shopping-cart-header -->
       <div class="mx-auto text-center mt-3" *ngIf="!(cartService.cart | async)">
         <mat-spinner class="mx-auto"></mat-spinner>
       </div>
       <ul class="shopping-cart-items">
-        <li class="clearfix" *ngFor="let item of (cartService.cart |async)?.productOrders">
+        <li class="clearfix" *ngFor="let item of (cartService.cart | async)?.productOrders">
           <img [src]="item.product.defaultImage" width="100" height="70" [alt]="item.product.name" />
-          <span class="item-name">{{(item.product.name.length>60)? (item.product.name |
-            slice:0:60)+'...':(item.product.name)}}</span>
-          <span class="item-price">{{item.product.price | currency:'$'}}</span>
-          <span class="item-quantity">Quantity: {{item.quantity}}</span>
+          <span class="item-name">{{
+            item.product.name.length > 60 ? (item.product.name | slice: 0:60) + '...' : item.product.name
+          }}</span>
+          <span class="item-price text-danger"><del>{{ item.product.price | currency: '$' }}</del></span>
+          <span class="item-quantity">Quantity: {{ item.quantity }}</span>
+          <br />
+          <span class="item-price text-success">{{ item.product.finalPrice | currency: '$' }}</span>
         </li>
       </ul>
 

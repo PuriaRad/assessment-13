@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { NavigationExtras, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
@@ -13,10 +14,9 @@ import { ProductApiService } from 'src/app/core/api/custom/product-api.service';
 export class HomeComponent implements OnInit {
   keywords!: string;
   recoms$!: Observable<Product[]>;
-  constructor(
-    private productApi: ProductApiService,
-    private router: Router
-  ) {}
+  constructor(private productApi: ProductApiService, private router: Router, private title: Title) {
+    title.setTitle('Home');
+  }
 
   async ngOnInit() {
     this.productApi.getRecommended().pipe((recoms) => (this.recoms$ = recoms));
