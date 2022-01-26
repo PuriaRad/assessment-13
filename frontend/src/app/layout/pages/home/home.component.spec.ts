@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import {
   ComponentFixture,
   TestBed,
@@ -20,7 +21,7 @@ describe('HomeComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [HomeComponent],
       providers: [ProductApiService],
-      imports: [RouterTestingModule, CartModule, ProductsGridModule, MatIconModule, FormsModule],
+      imports: [RouterTestingModule, CartModule, ProductsGridModule, MatIconModule, FormsModule, HttpClientModule],
     }).compileComponents();
   });
 

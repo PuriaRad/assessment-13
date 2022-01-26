@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import {
   ComponentFixture,
   TestBed,
@@ -15,7 +16,7 @@ describe('AuthComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AuthComponent],
-      providers: [UserService, UserApiService], imports:[RouterTestingModule]
+      providers: [UserService, UserApiService], imports:[RouterTestingModule, HttpClientModule]
     }).compileComponents();
   });
 
