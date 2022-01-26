@@ -1,1 +1,93 @@
-<p>admin-products works!</p>
+<div class="container-fluid">
+  <div
+    class="
+      row
+      justify-content-start
+      px-3
+      mt-3
+      py-3
+      mb-3
+      mat-elevation-z2
+      white-back
+      text-left
+      align-items-center
+    "
+  >
+    <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+      <h3 class="mb-0">Products</h3>
+    </div>
+    <app-e-button (buttonClicked)="createProduct()" [model]="'Create'"></app-e-button>
+  </div>
+  <div class="row justify-content-start mt-3 py-3 mb-3 mat-elevation-z2 white-back text-left">
+    <div class="col-12">
+      <div class="table-container">
+        <table mat-table [dataSource]="dataSource" dir="ltr" class="w-100">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>ID</th>
+            <td width="5%" mat-cell *matCellDef="let element">
+              {{ element.id }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="defaultImage">
+            <th mat-header-cell *matHeaderCellDef>Image</th>
+            <td width="10%" mat-cell *matCellDef="let element">
+              <img width="80px" height="80px" [src]="element.defaultImage" [alt]="element.name" />
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td width="20%" mat-cell *matCellDef="let element">
+              {{ element.name }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>Description</th>
+            <td width="35%" mat-cell *matCellDef="let element">
+              {{
+                element.description.length > 60
+                  ? (element.description | slice: 0:60) + '...'
+                  : element.description
+              }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="discount">
+            <th mat-header-cell *matHeaderCellDef>Discount</th>
+            <td width="10%" mat-cell *matCellDef="let element">
+              {{ element.discount }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef>price</th>
+            <td width="15%" mat-cell *matCellDef="let element">
+              {{ element.price | currency: '$' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef>Edit</th>
+            <td width="5%" mat-cell *matCellDef="let element" class="text-center">
+              <button mat-icon-button (click)="edit(element)" color="primary">
+                <i class="fas fa-edit"></i>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </div>
+    <div class="col-12">
+      <mat-paginator
+        #paginator
+        [length]="length"
+        showFirstLastButtons
+        [pageIndex]="pageIndex"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="LimitOrders($event)"
+        color="primary"
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

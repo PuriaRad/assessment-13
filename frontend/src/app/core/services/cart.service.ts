@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Cart } from 'src/app/classes/cart';
 import { Product } from 'src/app/classes/product';
+import { User } from 'src/app/classes/user';
+
 import { CartApiService } from '../api/custom/cart-api.service';
 import { UserService } from './user.service';
-import { User } from 'src/app/classes/user';
 
 @Injectable({
   providedIn: 'root',
@@ -17,9 +18,11 @@ export class CartService {
   async setCart() {
     if (this.userService.user.getValue()) {
       const user: User = this.userService.user.getValue() as User;
-      const cart = await this.cartApi.getCart(user.id);
-      if (cart) {
-        this.cart.next(cart);
+      if (user.role == 'CUSTOMER') {
+        const cart = await this.cartApi.getCart(user.id);
+        if (cart) {
+          this.cart.next(cart);
+        }
       }
     }
   }

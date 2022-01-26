@@ -67,6 +67,10 @@ export class AuthComponent implements OnInit {
 
   loginAs(user: User) {
     this.userService.loginWithUser(user);
-    this.router.navigate(['/']);
+    if (user.role == 'ADMIN') {
+      this.router.navigate(['/admin-products']);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 }

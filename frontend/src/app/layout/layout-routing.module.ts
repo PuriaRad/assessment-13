@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {
+  RouterModule,
+  Routes,
+} from '@angular/router';
 
 import { AuthorizationGuard } from '../core/guards/authorization.guard';
 import { LayoutComponent } from './layout.component';
@@ -10,6 +13,12 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule) },
+      {
+        path: 'admin-product/:id',
+        loadChildren: () =>
+          import('./pages/admin-product/admin-product.module').then((m) => m.AdminProductModule),
+        canActivate: [AuthorizationGuard],
+      },
       {
         path: 'admin-product',
         loadChildren: () =>
