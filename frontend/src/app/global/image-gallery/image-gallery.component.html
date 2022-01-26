@@ -1,1 +1,13 @@
-<p>image-gallery works!</p>
+<div class="mx-auto text-center mt-3" *ngIf="!product">
+  <mat-spinner class="mx-auto"></mat-spinner>
+</div>
+<div class="row" *ngIf="product">
+  <div class="col-12 px-0">
+    <img class="img-fluid" width="100%" [src]="product?.defaultImage" [alt]="product?.name" />
+  </div>
+  <div class="row mx-auto mt-2">
+    <div class="col-3 px-0 border" *ngFor="let image of product?.images">
+      <img class="img-fluid " [src]="image" />
+    </div>
+  </div>
+</div>

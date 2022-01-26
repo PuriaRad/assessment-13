@@ -1,1 +1,56 @@
-<p>admin-product works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <!-- -------------------------------- form --------------------------------- -->
+    <div class="col-12 col-md-12 col-lg-8 border">
+      <form [formGroup]="form" (ngSubmit)="submit()" class="h-100">
+        <div class="row mx-lg-auto h-100">
+          <app-e-input
+            [label]="'Name'"
+            [formGroup]="form"
+            [control]="form.controls['name']"
+            [controlName]="'name'"
+            [required]="true"
+            [type]="'text'"
+            [maxlength]="200"
+          ></app-e-input>
+          <app-e-input
+            [label]="'Discount'"
+            [formGroup]="form"
+            [control]="form.controls['discount']"
+            [controlName]="'discount'"
+            [required]="true"
+            [type]="'number'"
+            [min]="0"
+          ></app-e-input>
+          <app-e-input
+            [label]="'Price'"
+            [formGroup]="form"
+            [control]="form.controls['price']"
+            [controlName]="'price'"
+            [required]="true"
+            [type]="'number'"
+            [min]="1"
+          ></app-e-input>
+          <app-e-input
+            [label]="'Description'"
+            [formGroup]="form"
+            [control]="form.controls['description']"
+            [controlName]="'description'"
+            [required]="true"
+            [type]="'text'"
+            [maxlength]="1000"
+            [xl]="'12'"
+            [lg]="'12'"
+            [md]="'12'"
+          ></app-e-input>
+          <div class="col-12 my-5 d-none d-xl-flex"></div>
+          <app-e-button [type]="'submit'" [model]="isEdit ? 'Edit' : 'Create'"></app-e-button>
+        </div>
+      </form>
+    </div>
+    <!-- ---------------------------- image gallery ---------------------------- -->
+    <div class="col-12 col-md-12 col-lg-4">
+      <app-image-gallery [product]="product"></app-image-gallery>
+    </div>
+  </div>
+</div>
