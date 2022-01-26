@@ -14,19 +14,7 @@ import { UserService } from './user.service';
 })
 export class CartService {
   cart = new BehaviorSubject<Cart | null>(null);
-  constructor(private cartApi: CartApiService, private userService: UserService) {}
-
-  async setCart() {
-    if (this.userService.user.getValue()) {
-      const user: User = this.userService.user.getValue() as User;
-      if (user.role == 'CUSTOMER') {
-        const cart = await this.cartApi.getCart(user.id);
-        if (cart) {
-          this.cart.next(cart);
-        }
-      }
-    }
-  }
+  constructor(private cartApi: CartApiService) {}
 
   addProduct(product: Product, quantity: number): void {
     if (this.cart.getValue() !== null) {
