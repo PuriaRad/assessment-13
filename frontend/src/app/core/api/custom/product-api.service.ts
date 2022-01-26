@@ -94,6 +94,6 @@ export class ProductApiService {
   }
 
   delete(id: number): Observable<void> {
-    return this.crud.delete('products', id);
+    return this.crud.delete('products/', id);
   }
 }

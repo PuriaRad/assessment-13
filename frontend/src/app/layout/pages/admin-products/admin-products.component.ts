@@ -16,6 +16,7 @@ import {
 } from 'rxjs';
 import { Product } from 'src/app/classes/product';
 import { ProductApiService } from 'src/app/core/api/custom/product-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-products',
@@ -26,7 +27,16 @@ export class AdminProductsComponent implements OnInit {
   products$!: Observable<Product[]>;
   isLoadingResults = true;
 
-  public displayedColumns = ['id', 'defaultImage', 'name', 'description', 'discount', 'price', 'edit'];
+  public displayedColumns = [
+    'id',
+    'defaultImage',
+    'name',
+    'description',
+    'discount',
+    'price',
+    'edit',
+    'delete',
+  ];
   public dataSource = new _MatTableDataSource<Product>();
 
   pageIndex = 0;
@@ -63,5 +73,23 @@ export class AdminProductsComponent implements OnInit {
 
   edit(element: Product) {
     this.router.navigate(['/admin-product/' + element.id]);
+  }
+
+  remove(element: Product) {
+    Swal.fire({
+      title: 'Do you want to delete this product?',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Delete',
+      denyButtonText: `Nooo`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.productAPI.delete(element.id).subscribe(() => {
+          this.fetchData();
+          Swal.fire('Deleted!', '', 'success');
+        });
+      }
+    });
   }
 }
