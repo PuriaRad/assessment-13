@@ -1,8 +1,8 @@
 import { HttpClientModule } from '@angular/common/http';
-import {
-  ComponentFixture,
-  TestBed,
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { UserService } from 'src/app/core/services/user.service';
@@ -16,7 +16,7 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HeaderComponent],
-      imports: [RouterTestingModule, HttpClientModule],
+      imports: [RouterTestingModule, HttpClientModule, MatToolbarModule, MatIconModule, MatButtonModule],
       providers: [UserService],
     }).compileComponents();
   });
