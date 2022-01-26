@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs';
 import { Cart } from 'src/app/classes/cart';
+import { ICart } from 'src/app/classes/icart.interface';
 import { Product } from 'src/app/classes/product';
 import { User } from 'src/app/classes/user';
 
@@ -40,8 +41,17 @@ export class CartService {
         currentValue.productOrders.push({ product, quantity });
       }
 
+      const sendingCart: ICart = {
+        id: currentValue.id,
+        products: currentValue.productOrders.map((productOrder) => {
+          return {
+            id: productOrder.product.id,
+            quantity: productOrder.quantity,
+          };
+        }),
+      };
+      this.cartApi.update(sendingCart).subscribe(() => {});
       this.cart.next(currentValue);
-      //TODO call the API and update the Cart! But guess what? There is no API!
     }
   }
 
