@@ -1,0 +1,13 @@
+<button
+  mat-raised-button
+  [color]="color"
+  [ngClass]="buttonClasses"
+  [type]="type"
+  [disabled]="disabledInvalidForm && formGroup && !formGroup.valid"
+  (click)="buttonClicked.emit()"
+>
+  <span *ngIf="customCaption">
+    {{ customCaption }}
+  </span>
+  <i *ngIf="hasIcon" [ngClass]="iconClasses"></i>
+</button>
