@@ -1,21 +1,12 @@
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { lastValueFrom } from 'rxjs';
 import { IProduct } from 'src/app/classes/iproduct.interface';
 import { Product } from 'src/app/classes/product';
 import { ProductApiService } from 'src/app/core/api/custom/product-api.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-admin-product',
@@ -31,7 +22,8 @@ export class AdminProductComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private productAPI: ProductApiService,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) {}
 
   async ngOnInit() {
@@ -47,6 +39,7 @@ export class AdminProductComponent implements OnInit {
         this.isEdit = true;
         this.product = await lastValueFrom(this.productAPI.getProduct(+params['id']));
         this.form.patchValue(this.product);
+        this.title.setTitle(`Admin-Product-Edit ${this.product.name}`);
       } else {
         this.product = new Product(
           -1,
@@ -62,6 +55,7 @@ export class AdminProductComponent implements OnInit {
           0,
           0
         );
+        this.title.setTitle('Admin-Product-Create')
       }
     });
   }

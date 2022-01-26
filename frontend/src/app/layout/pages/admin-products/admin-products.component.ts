@@ -1,19 +1,10 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
-import {
-  MatPaginator,
-  PageEvent,
-} from '@angular/material/paginator';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { _MatTableDataSource } from '@angular/material/table';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
-import {
-  lastValueFrom,
-  Observable,
-} from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { Product } from 'src/app/classes/product';
 import { ProductApiService } from 'src/app/core/api/custom/product-api.service';
 import Swal from 'sweetalert2';
@@ -46,7 +37,9 @@ export class AdminProductsComponent implements OnInit {
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
 
-  constructor(private router: Router, private productAPI: ProductApiService) {}
+  constructor(private router: Router, private productAPI: ProductApiService, private title: Title) {
+    title.setTitle('Admin-Products');
+  }
 
   ngOnInit(): void {
     this.fetchData();

@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
@@ -19,7 +20,11 @@ describe('AdminProductComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [AdminProductComponent],
-      providers: [ProductApiService, { provide: ActivatedRoute, useValue: { params: of({ id: '1' }) } }],
+      providers: [
+        ProductApiService,
+        Title,
+        { provide: ActivatedRoute, useValue: { params: of({ id: '1' }) } },
+      ],
       imports: [
         RouterTestingModule,
         ReactiveFormsModule,
