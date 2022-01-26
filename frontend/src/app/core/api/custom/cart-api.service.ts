@@ -5,18 +5,11 @@ import {
   Observable,
 } from 'rxjs';
 import { Cart } from 'src/app/classes/cart';
+import { ICart } from 'src/app/classes/icart.interface';
 import { Product } from 'src/app/classes/product';
 
 import { CrudService } from '../crud.service';
 import { ProductApiService } from './product-api.service';
-
-interface ICart {
-  id: number; // User id
-  products: {
-    id: number;
-    quantity: number;
-  }[];
-}
 
 @Injectable({
   providedIn: 'root',
@@ -47,6 +40,7 @@ export class CartApiService {
     );
   }
 
-  // No webservice to update cart!
-  // setCart()
+  update(cart: Required<ICart>): Observable<void> {
+    return this.crud.update<ICart>('carts/', cart.id, cart);
+  }
 }
