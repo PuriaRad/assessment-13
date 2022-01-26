@@ -4,19 +4,10 @@ import {
   map,
   Observable,
 } from 'rxjs';
+import { IProduct } from 'src/app/classes/iproduct.interface';
 import { Product } from 'src/app/classes/product';
 
 import { CrudService } from '../crud.service';
-
-interface IProduct {
-  id: number;
-  name: string;
-  description: string;
-  defaultImage: string;
-  images: string[];
-  price: number;
-  discount: number;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -77,7 +68,7 @@ export class ProductApiService {
 
   getProduct(id: number): Observable<Product> {
     return this.crud
-      .getOne<IProduct>('products/', id)
+      .getOne<Required<IProduct>>('products/', id)
       .pipe(
         map(
           (product) =>
@@ -94,12 +85,12 @@ export class ProductApiService {
       );
   }
 
-  create(product: Product): Observable<void> {
+  create(product: IProduct): Observable<void> {
     return this.crud.create<IProduct>('products', product);
   }
 
-  update(product: Product): Observable<void> {
-    return this.crud.update<IProduct>('products', product.id, product);
+  update(product: Required<IProduct>): Observable<void> {
+    return this.crud.update<IProduct>('products/', product.id, product);
   }
 
   delete(id: number): Observable<void> {
