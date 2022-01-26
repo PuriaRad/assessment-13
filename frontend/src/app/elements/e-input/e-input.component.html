@@ -1,1 +1,72 @@
-<p>e-input works!</p>
+<div id="e-input" class="form-group text-left" [formGroup]="formGroup">
+  <label class="e-label m-0 p-0">{{ label }} </label>
+
+  <small class="warn-color" *ngIf="required == true"> * </small>
+
+  <div class="input-group">
+    <div class="input-group-addon" *ngIf="startIcon">
+      <button
+        mat-ripple
+        class="btn pb-0 border"
+        type="button"
+        [disabled]="true"
+      >
+        <i [ngClass]="['fa', startIcon]" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <!-- ------------------------------- number -------------------------------- -->
+    <input
+      *ngIf="type == 'number'"
+      class="form-control"
+      [type]="'text'"
+      [formControlName]="controlName"
+      [class.is-valid]="control.valid && control.touched"
+      [class.is-invalid]="!control.valid && control.touched"
+      [required]="required"
+      [placeholder]="placeholder"
+      [min]="min"
+      [max]="max"
+      [autocomplete]="autocomplete"
+      [pattern]="pattern"
+      currencyMask
+      [options]="{
+        prefix: '',
+        thousands: ',',
+        precision: this.precision,
+        allowZero: true,
+        nullable: true,
+        suffix: this.suffix
+      }"
+      (input)="inputEvent.emit($event)"
+    />
+
+    <!-- --------------------------------- etc --------------------------------- -->
+    <input
+      *ngIf="type !== 'number'"
+      class="form-control"
+      [type]="type"
+      [formControlName]="controlName"
+      [class.is-valid]="control.valid && control.touched"
+      [class.is-invalid]="!control.valid && control.touched"
+      [class.form-control-file]="type == 'file'"
+      [required]="required"
+      [placeholder]="placeholder"
+      [minlength]="minlength"
+      [min]="min"
+      [maxlength]="maxlength"
+      [max]="max"
+      [autocomplete]="autocomplete"
+      [pattern]="pattern"
+      (input)="inputEvent.emit($event)"
+    />
+
+    <!-- -------------------------------- error -------------------------------- -->
+    <div
+      *ngIf="control.invalid && control.dirty && control.touched"
+      class="alert alert-danger btn-block small"
+    >
+      <div *ngIf="control.errors">{{ control.errors }}</div>
+    </div>
+  </div>
+</div>
