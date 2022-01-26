@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
@@ -19,7 +20,7 @@ describe('SearchComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [SearchComponent],
       imports: [CartModule, ProductsGridModule, MatIconModule, FormsModule, HttpClientModule, RouterTestingModule],
-      providers: [ProductApiService, { provide: ActivatedRoute, useValue: { queryParams: of({ keywords: 'keywords' }) } }],
+      providers: [ProductApiService,Title, { provide: ActivatedRoute, useValue: { queryParams: of({ keywords: 'keywords' }) } }],
     }).compileComponents();
   });
 

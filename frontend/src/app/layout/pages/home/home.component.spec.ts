@@ -5,6 +5,7 @@ import {
 } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { Title } from '@angular/platform-browser';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ProductApiService } from 'src/app/core/api/custom/product-api.service';
@@ -20,8 +21,15 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      providers: [ProductApiService],
-      imports: [RouterTestingModule, CartModule, ProductsGridModule, MatIconModule, FormsModule, HttpClientModule],
+      providers: [ProductApiService, Title],
+      imports: [
+        RouterTestingModule,
+        CartModule,
+        ProductsGridModule,
+        MatIconModule,
+        FormsModule,
+        HttpClientModule,
+      ],
     }).compileComponents();
   });
 

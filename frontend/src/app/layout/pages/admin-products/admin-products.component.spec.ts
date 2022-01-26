@@ -1,10 +1,10 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { ProductApiService } from 'src/app/core/api/custom/product-api.service';
@@ -28,7 +28,7 @@ describe('AdminProductsComponent', () => {
         RouterTestingModule,
         HttpClientModule,
       ],
-      providers: [ProductApiService, HttpClient],
+      providers: [ProductApiService, Title],
     }).compileComponents();
   });
 

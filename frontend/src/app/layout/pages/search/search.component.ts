@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/classes/product';
 import { ProductApiService } from 'src/app/core/api/custom/product-api.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-search',
@@ -13,10 +14,9 @@ export class SearchComponent implements OnInit {
   keywords!: string;
   products$!: Observable<Product[]>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private productApi: ProductApiService,
-  ) {}
+  constructor(private route: ActivatedRoute, private productApi: ProductApiService, private title: Title) {
+    title.setTitle('Search');
+  }
 
   async ngOnInit() {
     this.route.queryParams.subscribe((qp) => {
