@@ -16,6 +16,7 @@ import {
 } from 'rxjs';
 import { Product } from 'src/app/classes/product';
 import { ProductApiService } from 'src/app/core/api/custom/product-api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-products',
@@ -75,8 +76,20 @@ export class AdminProductsComponent implements OnInit {
   }
 
   remove(element: Product) {
-    this.productAPI.delete(element.id).subscribe(() => {
-      this.fetchData();
+    Swal.fire({
+      title: 'Do you want to delete this product?',
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Delete',
+      denyButtonText: `Nooo`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.productAPI.delete(element.id).subscribe(() => {
+          this.fetchData();
+          Swal.fire('Deleted!', '', 'success');
+        });
+      }
     });
   }
 }
