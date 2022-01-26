@@ -1,4 +1,4 @@
-<div id="e-input" class="form-group text-left" [formGroup]="formGroup">
+<div id="e-input" class="form-group text-left" [formGroup]="formGroup" *ngIf="formGroup && controlName">
   <label class="e-label m-0 p-0">{{ label }} </label>
 
   <small class="text-danger" *ngIf="required == true"> * </small>
@@ -47,8 +47,8 @@
       class="form-control"
       [type]="type"
       [formControlName]="controlName"
-      [class.is-valid]="control.valid && control.touched"
-      [class.is-invalid]="!control.valid && control.touched"
+      [class.is-valid]="control?.valid && control?.touched"
+      [class.is-invalid]="!control?.valid && control?.touched"
       [class.form-control-file]="type == 'file'"
       [required]="required"
       [placeholder]="placeholder"
@@ -63,7 +63,7 @@
 
     <!-- -------------------------------- error -------------------------------- -->
     <div
-      *ngIf="control.invalid && control.touched"
+      *ngIf="control?.invalid && control?.touched"
       class="alert alert-danger btn-block small"
     >
       <div *ngIf="control.errors.required">This field is required!</div>
