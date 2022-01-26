@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { map, Observable, take } from 'rxjs';
+import {
+  map,
+  Observable,
+} from 'rxjs';
 import { Product } from 'src/app/classes/product';
 
 import { CrudService } from '../crud.service';
@@ -24,7 +27,7 @@ export class ProductApiService {
   getProducts(pageIndex?: number, pageSize?: number, query?: string): Observable<Product[]> {
     let options: any = {};
     if (pageIndex) {
-      options['_page_number'] = pageIndex;
+      options['_page'] = pageIndex + 1; // because it starts from 0
     }
     if (pageSize) {
       options['_limit'] = pageSize;
