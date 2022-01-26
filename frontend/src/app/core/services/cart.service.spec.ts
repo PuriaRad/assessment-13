@@ -4,14 +4,13 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { CartApiService } from '../api/custom/cart-api.service';
 import { CartService } from './cart.service';
-import { UserService } from './user.service';
 
 describe('CartService', () => {
   let service: CartService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [CartApiService, UserService],
+      providers: [CartApiService],
       imports: [HttpClientModule, RouterTestingModule],
     });
     service = TestBed.inject(CartService);
