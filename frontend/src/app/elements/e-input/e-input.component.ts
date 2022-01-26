@@ -26,7 +26,7 @@ export class EInputComponent implements OnInit {
   @Input() public sm = '12'; // small
   @Input() public md = '6'; // medium
   @Input() public lg = '4'; // medium
-  @Input() public xl = '3'; // extra large
+  @Input() public xl = '4'; // extra large
   @Input() public hasMy3 = true; // my-3
   @Input() public zeroPadding = false; // p-0
 

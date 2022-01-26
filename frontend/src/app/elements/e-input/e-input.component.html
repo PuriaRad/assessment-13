@@ -1,7 +1,7 @@
 <div id="e-input" class="form-group text-left" [formGroup]="formGroup">
   <label class="e-label m-0 p-0">{{ label }} </label>
 
-  <small class="warn-color" *ngIf="required == true"> * </small>
+  <small class="text-danger" *ngIf="required == true"> * </small>
 
   <div class="input-group">
     <div class="input-group-addon" *ngIf="startIcon">
@@ -18,7 +18,7 @@
     <!-- ------------------------------- number -------------------------------- -->
     <input
       *ngIf="type == 'number'"
-      class="form-control"
+      class="form-control text-left"
       [type]="'text'"
       [formControlName]="controlName"
       [class.is-valid]="control.valid && control.touched"
