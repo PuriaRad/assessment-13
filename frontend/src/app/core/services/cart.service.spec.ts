@@ -1,12 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
+import { CartApiService } from '../api/custom/cart-api.service';
 import { CartService } from './cart.service';
+import { UserService } from './user.service';
 
 describe('CartService', () => {
   let service: CartService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ providers: [CartApiService, UserService] });
     service = TestBed.inject(CartService);
   });
 
