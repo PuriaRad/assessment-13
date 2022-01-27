@@ -28,7 +28,6 @@ export class SearchComponent implements OnInit {
   }
 
   async search() {
-    console.log('this.keywords >> ', this.keywords);
     this.productApi
       .getProducts(undefined, undefined, this.keywords)
       .pipe((products) => (this.products$ = products));

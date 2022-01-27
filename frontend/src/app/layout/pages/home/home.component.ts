@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
         keywords: this.keywords,
       },
     };
-    console.log(navigationExtras);
     this.router.navigate(['/search'], navigationExtras);
   }
 }

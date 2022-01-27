@@ -63,7 +63,6 @@ export class AdminProductComponent implements OnInit {
   submit() {
     if (this.form.valid) {
       const data = this.form.getRawValue();
-      console.log('data :>> ', data);
       if (this.isEdit) {
         const product: Required<IProduct> = {
           id: this.product.id,

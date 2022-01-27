@@ -53,7 +53,6 @@ export class AdminProductsComponent implements OnInit {
   }
 
   LimitOrders(event: PageEvent) {
-    console.log(event);
     this.pageSize = event.pageSize;
     this.pageIndex = event.pageIndex;
     this.fetchData();
